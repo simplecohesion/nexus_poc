@@ -12,7 +12,7 @@ export async function physicalMatchForm(request: HttpRequest, context: Invocatio
   const execAsync = util.promisify(require('child_process').exec);
 
   try {
-    const result = await execAsync('Rscript /r-script/physical_analysis/API_physical_match_form_FEY.R')
+    const result = await execAsync('Rscript physical_analysis/API_physical_match_form_FEY.R')
     return {
       status: 200,
       body: `R script executed successfully: ${result}`

@@ -8,7 +8,7 @@ export async function firstContactCorner(request: HttpRequest, context: Invocati
     const execAsync = util.promisify(exec);
 
     try {
-        const result = await execAsync('Rscript /app/r-script/physical_analysis/API_physical_match_form_FEY.R')
+        const result = await execAsync('Rscript physical_analysis/API_physical_match_form_FEY.R')
         return {
             status: 200,
             body: `R script executed successfully: ${result}`
