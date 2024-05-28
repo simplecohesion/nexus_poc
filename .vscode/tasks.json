@@ -5,48 +5,28 @@
 			"type": "func",
 			"label": "func: host start",
 			"command": "host start",
-			"problemMatcher": "$func-node-watch",
+			"problemMatcher": "$func-python-watch",
 			"isBackground": true,
-			"dependsOn": "npm build (functions)",
+			"dependsOn": "pip install (functions)",
 			"options": {
-				"cwd": "${workspaceFolder}/analysis_functions"
+				"cwd": "${workspaceFolder}/r-analysis"
 			}
 		},
 		{
+			"label": "pip install (functions)",
 			"type": "shell",
-			"label": "npm build (functions)",
-			"command": "npm run build",
-			"dependsOn": "npm clean (functions)",
-			"problemMatcher": "$tsc",
-			"options": {
-				"cwd": "${workspaceFolder}/analysis_functions"
-			}
-		},
-		{
-			"type": "shell",
-			"label": "npm install (functions)",
-			"command": "npm install",
-			"options": {
-				"cwd": "${workspaceFolder}/analysis_functions"
-			}
-		},
-		{
-			"type": "shell",
-			"label": "npm prune (functions)",
-			"command": "npm prune --production",
-			"dependsOn": "npm build (functions)",
+			"osx": {
+				"command": "${config:azureFunctions.pythonVenv}/bin/python -m pip install -r requirements.txt"
+			},
+			"windows": {
+				"command": "${config:azureFunctions.pythonVenv}\\Scripts\\python -m pip install -r requirements.txt"
+			},
+			"linux": {
+				"command": "${config:azureFunctions.pythonVenv}/bin/python -m pip install -r requirements.txt"
+			},
 			"problemMatcher": [],
 			"options": {
-				"cwd": "${workspaceFolder}/analysis_functions"
-			}
-		},
-		{
-			"type": "shell",
-			"label": "npm clean (functions)",
-			"command": "npm run clean",
-			"dependsOn": "npm install (functions)",
-			"options": {
-				"cwd": "${workspaceFolder}/analysis_functions"
+				"cwd": "${workspaceFolder}/r-analysis"
 			}
 		}
 	]

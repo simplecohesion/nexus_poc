@@ -21,7 +21,7 @@ export async function physicalMatchForm(request: HttpRequest, context: Invocatio
   catch (e) {
     return {
       status: 500,
-      body: `R script execution failed: ${e}`
+      body: `R script execution failed: ${JSON.stringify(e)}`
     };
   }
 };
