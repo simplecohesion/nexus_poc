@@ -1,6 +1,5 @@
 ####################
-# source("azureml_utils.R")
-source("../library/feyenoord_utils.R")
+source("library/feyenoord_utils.R")
 #####################
 ## Function in depth
 fun_physical_match_form_FEY <- function(benchmark_path, game_data_path, gata_path,
@@ -9,11 +8,7 @@ fun_physical_match_form_FEY <- function(benchmark_path, game_data_path, gata_pat
                                         output_path) {
   ## Load the data for the benchmark data frame
   ## Load benchmarks
-  # DIRS <- list()
-  # DIRS$Fysieke_data <- "/Users/folkert.boer@feyenoord.nl/Library/CloudStorage/OneDrive-FeyenoordRotterdam/Medical & Performance Feyenoord 1/Performance/Data"
-  # benchmark.list <- list.files(path = "/Users/folkert.boer@feyenoord.nl/Library/CloudStorage/OneDrive-FeyenoordRotterdam/Medical & Performance Feyenoord 1/Performance/Data", pattern ='*Match Volumes.xlsx')
   benchmark.list <- benchmark_path
-  # sheet_names1 = excel_sheets(benchmark.list)
   benchmark.list <- read_excel_sheet(
     sheet_name = "Info",
     path = benchmark.list,
@@ -52,7 +47,6 @@ fun_physical_match_form_FEY <- function(benchmark_path, game_data_path, gata_pat
     as.data.frame()
   benchmark.list$Position <- ifelse(benchmark.list$Player == "Bart Nieuwkoop", 2, benchmark.list$Position)
   ##
-  # zero_minutes <- which(benchmark.list$x90_Played == 0)
   for (i in 1:nrow(benchmark.list)) {
     benchmark.list$av_Total.Distance[i] <- ifelse(is.na(benchmark.list$av_Total.Distance[i]) == TRUE,
       mean(dplyr::filter(benchmark.list, Position == benchmark.list$Position[i], Player != benchmark.list$Player[i])$av_Total.Distance, na.rm = TRUE),
@@ -575,7 +569,3 @@ fun_physical_match_form_FEY <- function(benchmark_path, game_data_path, gata_pat
   # Export tot .json file
   jsonlite::write_json(game_data_physical_data, path = paste0(output_path, "game_data_physical_data.json"))
 }
-
-
-#########################################################################################################
-#########################################################################################################
